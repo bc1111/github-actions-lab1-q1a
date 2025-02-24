@@ -1,15 +1,20 @@
-name: CI
-'on':
-  push: null
+name: Workflow Demo
+
+on: [push]
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4 #added
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.11
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Create a text file
+      run: echo "Hello, world!" > hello.txt
+
+    - name: Archive text file
+      uses: actions/upload-artifact@v4
+      with:
+        name: hello-artifact
+        path: hello.txt
